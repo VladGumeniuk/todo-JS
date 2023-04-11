@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-style: 100%;
+  line-height: 1;
+  font-style: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-style: inherit;
+  font-weight: 400;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.todo {
+  height: 100vh;
+  padding: 50px 0;
+  background: url(./../images/IrF.gif);
+}
+.todo__box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.todo__inner {
+  display: flex;
+  flex-grow: 1;
+  padding: 50px 0;
+}
+.todo__add {
+  flex: 0 1 50%;
+  padding: 20px;
+  border: 2px solid yellow;
+  border-radius: 10px 0 0 10px;
+}
+.todo__add-item {
+  display: flex;
+  padding: 15px 15px;
+  font-size: 20px;
+  line-height: 1.2;
+  cursor: default;
+}
+.todo__add-item:hover {
+  border: 2px solid yellow;
+}
+.todo__add-item span {
+  display: block;
+  width: 100%;
+}
+.todo__done {
+  flex: 0 1 50%;
+  padding: 20px;
+  border: 2px solid yellow;
+  border-left: 0px;
+  border-radius: 0 10px 10px 0;
+}
+.todo__form {
+  text-align: center;
+}
+.todo__form-input {
+  width: 400px;
+  padding: 5px 10px;
+  font-size: 16px;
+  background: transparent;
+  border-bottom: 2px solid yellow;
+  color: #fff;
+}
+.todo__form-btn {
+  margin-left: 10px;
+  font-weight: 700;
+  padding: 7px 15px;
+  background: yellow;
+  color: #000;
+  transition: background 0.3s ease;
+}
+.todo__form-btn:hover {
+  background: rgba(255, 255, 0, 0.651);
+}
+
+.title {
+  font-size: 42px;
+  line-height: 1.3;
+  font-weight: 700;
+  text-align: center;
+}
+
+.todo-title {
+  font-weight: 700;
+  text-align: center;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.add-btn {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.todo__add-item:hover .add-btn {
+  margin-left: 10px;
+  opacity: 1;
+  visibility: visible;
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+  transition: opacity 0.5s ease;
+}
+
+.btn-done {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.todo__add-item:hover .btn-done {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+  width: 17px;
+  height: 24px;
+  background-color: transparent;
+  background: url(./../images/done.svg) center/17px no-repeat;
+  transition: opacity 0.5s ease;
+}

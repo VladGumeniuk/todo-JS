@@ -1,0 +1,119 @@
+@import "vars";
+@import "fonts";
+@import "reset";
+@import "global";
+
+.todo {
+  height: 100vh;
+  padding: 50px 0;
+  background: url(./../images/IrF.gif);
+
+  &__box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__inner {
+    display: flex;
+    flex-grow: 1;
+    padding: 50px 0;
+  }
+
+  &__add {
+    flex: 0 1 50%;
+    padding: 20px;
+    border: 2px solid yellow;
+    border-radius: 10px 0 0 10px;
+  }
+
+  &__add-item {
+    display: flex;
+    padding: 15px 15px;
+    font-size: 20px;
+    line-height: 1.2;
+    cursor: default;
+    &:hover {
+      border: 2px solid yellow;
+    }
+    span {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &__done {
+    flex: 0 1 50%;
+    padding: 20px;
+    border: 2px solid yellow;
+    border-left: 0px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  &__form {
+    text-align: center;
+  }
+
+  &__form-input {
+    width: 400px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background: transparent;
+    border-bottom: 2px solid yellow;
+    color: #fff;
+  }
+
+  &__form-btn {
+    margin-left: 10px;
+    font-weight: 700;
+    padding: 7px 15px;
+    background: yellow;
+    color: #000;
+    transition: background 0.3s ease;
+    &:hover {
+      background: rgba(255, 255, 0, 0.651);
+    }
+  }
+}
+
+.title {
+  font-size: 42px;
+  line-height: 1.3;
+  font-weight: 700;
+  text-align: center;
+}
+.todo-title {
+  font-weight: 700;
+  text-align: center;
+  font-size: 28px;
+  line-height: 1.3;
+}
+.add-btn {
+  visibility: hidden;
+  opacity: 0;
+}
+.todo__add-item:hover .add-btn {
+  margin-left: 10px;
+  opacity: 1;
+  visibility: visible;
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+  transition: opacity 0.5s ease;
+}
+.btn-done {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.todo__add-item:hover .btn-done {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+  width: 17px;
+  height: 24px;
+  background-color: transparent;
+  background: url(./../images/done.svg) center / 17px no-repeat;
+  transition: opacity 0.5s ease;
+}
