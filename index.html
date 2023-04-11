@@ -12,20 +12,27 @@
       <div class="container todo__box">
         <h1 class="title">Список задач</h1>
         <div class="todo__inner">
-          <ul class="todo__add">
-            <li class="todo-title">Выполняется:</li>
-          </ul>
-          <ul class="todo__done">
-            <li class="todo-title">Завершенные:</li>
-          </ul>
+          <div class="todo__add">
+            <h2 class="todo-title">Выполняется:</h2>
+            <ul class="list-add"></ul>
+          </div>
+          <div class="todo__done">
+            <h2 class="todo-title">Завершенные:</h2>
+            <ul class="list-done"></ul>
+          </div>
         </div>
         <form class="todo__form">
           <input class="todo__form-input" type="text" />
           <button class="todo__form-btn" type="submit">Добавить</button>
         </form>
+        <button class="btn-clear" type="submit">Очистить кэш</button>
       </div>
     </section>
-
+    <!-- <div class="container">
+      <button class="btn" style="padding: 20px">ДОБАВИТЬ РАЗМЕТКУ</button>
+      <div class="box"></div>
+    </div> -->
     <script src="js/todo.js"></script>
+    <!-- <script src="js/main.js"></script> -->
   </body>
 </html>

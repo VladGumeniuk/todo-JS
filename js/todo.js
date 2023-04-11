@@ -1,19 +1,21 @@
-const toDoList = document.querySelector(".todo__add");
+const toDoList = document.querySelector(".list-add");
 const toDoForm = document.querySelector(".todo__form");
 const toDoInput = document.querySelector(".todo__form-input");
-const doneList = document.querySelector(".todo__done");
+const doneList = document.querySelector(".list-done");
 
-toDoForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+let itemsArray = localStorage.getItem("items")
+  ? JSON.parse(localStorage.getItem("items"))
+  : [];
+localStorage.setItem("items", JSON.stringify(itemsArray));
+const data = JSON.parse(localStorage.getItem("items"));
 
-  const toDoText = toDoInput.value;
-
+const liMaker = (text) => {
   const liHTML = document.createElement("li");
   liHTML.classList.add("todo__add-item");
   toDoList.append(liHTML);
 
   const spanHTML = document.createElement("span");
-  spanHTML.innerText = toDoText;
+  spanHTML.innerText = text;
   liHTML.append(spanHTML);
 
   const doneHTML = document.createElement("button");
@@ -21,8 +23,8 @@ toDoForm.addEventListener("submit", function (e) {
   liHTML.append(doneHTML);
 
   const buttonHTML = document.createElement("button");
-  buttonHTML.innerText = "X";
   buttonHTML.classList.add("add-btn");
+  buttonHTML.innerText = "X";
   liHTML.append(buttonHTML);
 
   doneHTML.addEventListener("click", function () {
@@ -31,33 +33,51 @@ toDoForm.addEventListener("submit", function (e) {
     doneList.append(liHTML);
 
     const spanHTML = document.createElement("span");
-    spanHTML.innerText = toDoText;
+    spanHTML.innerText = text;
     liHTML.append(spanHTML);
 
     const buttonHTML = document.createElement("button");
-    buttonHTML.innerText = "X";
     buttonHTML.classList.add("add-btn");
+    buttonHTML.innerText = "X";
     liHTML.append(buttonHTML);
 
     buttonHTML.addEventListener("click", function () {
-      const resault = confirm("Ты уверен брат что хочешь это сделать?");
-
-      if (resault == true) {
-        this.closest(".todo__add-item").remove();
-      }
+      this.closest(".todo__add-item").remove();
     });
 
     this.closest(".todo__add-item").remove();
   });
 
-  buttonHTML.addEventListener("click", function () {
-    const resault = confirm("Ты уверен брат что хочешь это сделать?");
+  const buttons = document.querySelectorAll(".add-btn");
 
-    if (resault == true) {
-      this.closest(".todo__add-item").remove();
-    }
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", function () {
+      const buttonID = index;
+      buttonHTML.addEventListener("click", function () {
+        buttonHTML.closest(".todo__add-item").remove();
+        data.splice(buttonID, 1);
+        console.log(delArray);
+      });
+      console.log(buttonID);
+    });
   });
+};
 
+toDoForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  itemsArray.push(toDoInput.value);
+  localStorage.setItem("items", JSON.stringify(itemsArray));
+  liMaker(toDoInput.value);
   toDoInput.value = "";
   toDoInput.focus();
 });
+
+data.forEach((item) => {
+  liMaker(item);
+});
+
+document.querySelector(".btn-clear").addEventListener("click", function () {
+  localStorage.clear();
+});
+// =======================
