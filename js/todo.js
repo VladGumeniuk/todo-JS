@@ -56,7 +56,8 @@ const liMaker = (text) => {
       buttonHTML.addEventListener("click", function () {
         buttonHTML.closest(".todo__add-item").remove();
         data.splice(buttonID, 1);
-        console.log(delArray);
+        localStorage.setItem("items", JSON.stringify(itemsArray));
+        console.log(data);
       });
       console.log(buttonID);
     });
