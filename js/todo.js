@@ -1,84 +1,132 @@
-const toDoList = document.querySelector(".list-add");
-const toDoForm = document.querySelector(".todo__form");
-const toDoInput = document.querySelector(".todo__form-input");
-const doneList = document.querySelector(".list-done");
+const formToDo = document.querySelector(".todo__form");
+const inputToDo = document.querySelector(".todo__form-input");
+const listAdd = document.querySelector(".list-add");
+const listDone = document.querySelector(".list-dones");
 
-let itemsArray = localStorage.getItem("items")
-  ? JSON.parse(localStorage.getItem("items"))
-  : [];
-localStorage.setItem("items", JSON.stringify(itemsArray));
-const data = JSON.parse(localStorage.getItem("items"));
+let saveLS = [];
+let doneLS = [];
 
-const liMaker = (text) => {
-  const liHTML = document.createElement("li");
-  liHTML.classList.add("todo__add-item");
-  toDoList.append(liHTML);
-
-  const spanHTML = document.createElement("span");
-  spanHTML.innerText = text;
-  liHTML.append(spanHTML);
-
-  const doneHTML = document.createElement("button");
-  doneHTML.classList.add("btn-done");
-  liHTML.append(doneHTML);
-
-  const buttonHTML = document.createElement("button");
-  buttonHTML.classList.add("add-btn");
-  buttonHTML.innerText = "X";
-  liHTML.append(buttonHTML);
-
-  doneHTML.addEventListener("click", function () {
-    const liHTML = document.createElement("li");
-    liHTML.classList.add("todo__add-item");
-    doneList.append(liHTML);
-
-    const spanHTML = document.createElement("span");
-    spanHTML.innerText = text;
-    liHTML.append(spanHTML);
-
-    const buttonHTML = document.createElement("button");
-    buttonHTML.classList.add("add-btn");
-    buttonHTML.innerText = "X";
-    liHTML.append(buttonHTML);
-
-    buttonHTML.addEventListener("click", function () {
-      this.closest(".todo__add-item").remove();
-    });
-
-    this.closest(".todo__add-item").remove();
+if (localStorage.getItem("toDo")) {
+  saveLS = JSON.parse(localStorage.getItem("toDo"));
+  saveLS.forEach(function (task) {
+    insertHTML(task);
   });
-
-  const buttons = document.querySelectorAll(".add-btn");
-
-  buttons.forEach((button, index) => {
-    button.addEventListener("click", function () {
-      const buttonID = index;
-      buttonHTML.addEventListener("click", function () {
-        buttonHTML.closest(".todo__add-item").remove();
-        data.splice(buttonID, 1);
-        localStorage.setItem("items", JSON.stringify(itemsArray));
-        console.log(data);
-      });
-      console.log(buttonID);
-    });
+}
+if (localStorage.getItem("done")) {
+  doneLS = JSON.parse(localStorage.getItem("done"));
+  doneLS.forEach(function (task) {
+    doneHTML(task);
   });
-};
+}
 
-toDoForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+formToDo.addEventListener("submit", addToDo);
+listAdd.addEventListener("click", deleteToDo);
+listAdd.addEventListener("click", doneToDo);
+listDone.addEventListener("click", deleteToDo);
 
-  itemsArray.push(toDoInput.value);
-  localStorage.setItem("items", JSON.stringify(itemsArray));
-  liMaker(toDoInput.value);
-  toDoInput.value = "";
-  toDoInput.focus();
-});
+function addToDo(event) {
+  event.preventDefault();
 
-data.forEach((item) => {
-  liMaker(item);
-});
+  const textToDo = inputToDo.value;
 
-document.querySelector(".btn-clear").addEventListener("click", function () {
-  localStorage.clear();
-});
-// =======================
+  const newTask = {
+    id: Date.now(),
+    text: textToDo,
+  };
+
+  saveLS.push(newTask);
+  setLS();
+
+  insertHTML(newTask);
+
+  inputToDo.value = "";
+  inputToDo.focus();
+}
+
+function deleteToDo(event) {
+  if (event.target.dataset.action !== "delete") {
+    return;
+  }
+
+  const parenNode = event.target.closest(".list-add-item");
+
+  const id = Number(parenNode.id);
+  saveLS = saveLS.filter(function (toDo) {
+    if (toDo.id === id) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  setLS();
+
+  doneLS = doneLS.filter(function (toDo) {
+    if (toDo.id === id) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  localStorage.setItem("done", JSON.stringify(doneLS));
+
+  parenNode.remove();
+}
+
+function doneToDo(event) {
+  if (event.target.dataset.action !== "done") {
+    return;
+  }
+  const id = event.target.closest(".list-add-item");
+  const idSpan = id.querySelector("#ttext");
+  const spanText = idSpan.innerText;
+  console.log(spanText);
+
+  const twoTask = {
+    id: Date.now(),
+    text: spanText,
+  };
+
+  doneLS.push(twoTask);
+  localStorage.setItem("done", JSON.stringify(doneLS));
+
+  doneHTML(twoTask);
+
+  const parenNode = event.target.closest(".list-add-item");
+
+  const idLi = Number(parenNode.id);
+  saveLS = saveLS.filter(function (toDo) {
+    if (toDo.id === idLi) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  setLS();
+
+  parenNode.remove();
+}
+
+function setLS() {
+  localStorage.setItem("toDo", JSON.stringify(saveLS));
+}
+
+function insertHTML(task) {
+  const createHTML = `
+    <li id="${task.id}" class="list-add-item">
+      <span id="ttext">${task.text}</span>
+      <button class="list-done" data-action="done" role="article"></button>
+      <button class="list-delete" data-action="delete" role="article">X</button>
+    </li>`;
+
+  listAdd.insertAdjacentHTML("beforeend", createHTML);
+}
+
+function doneHTML(task) {
+  const createHTML = `
+    <li id="${task.id}" class="list-add-item">
+      <span id="ttext">${task.text}</span>
+      <button class="list-delete" data-action="delete" role="article">X</button>
+    </li>`;
+
+  listDone.insertAdjacentHTML("beforeend", createHTML);
+}

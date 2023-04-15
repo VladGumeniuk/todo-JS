@@ -35,30 +35,6 @@
     }
   }
 
-  &__add-item {
-    display: flex;
-    padding: 15px 15px;
-    font-size: 20px;
-    line-height: 1.2;
-    cursor: default;
-    @media (min-width: 768px) {
-      &:hover {
-        border: 2px solid yellow;
-      }
-    }
-    @media (max-width: 768px) {
-      border: 2px solid yellow;
-    }
-    span {
-      display: block;
-      width: 100%;
-    }
-    @media (max-width: 768px) {
-      padding: 10px 10px;
-      font-size: 16px;
-    }
-  }
-
   &__done {
     flex: 0 1 50%;
     padding: 20px;
@@ -106,6 +82,30 @@
   }
 }
 
+.list-add-item {
+  display: flex;
+  padding: 15px 15px;
+  font-size: 20px;
+  line-height: 1.2;
+  cursor: default;
+  @media (min-width: 768px) {
+    &:hover {
+      border: 2px solid yellow;
+    }
+  }
+  @media (max-width: 768px) {
+    border: 2px solid yellow;
+  }
+  span {
+    display: block;
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+    font-size: 16px;
+  }
+}
+
 .title {
   font-size: 42px;
   line-height: 1.3;
@@ -124,11 +124,11 @@
     font-size: 20px;
   }
 }
-.add-btn {
+.list-delete {
   visibility: hidden;
   opacity: 0;
 }
-.todo__add-item:hover .add-btn {
+.list-add-item:hover .list-delete {
   margin-left: 10px;
   opacity: 1;
   visibility: visible;
@@ -137,12 +137,12 @@
   font-size: 20px;
   transition: opacity 0.5s ease;
 }
-.btn-done {
+.list-done {
   visibility: hidden;
   opacity: 0;
 }
 
-.todo__add-item:hover .btn-done {
+.list-add-item:hover .list-done {
   opacity: 1;
   visibility: visible;
   display: block;
@@ -154,7 +154,7 @@
 }
 
 @media (max-width: 768px) {
-  .add-btn {
+  .list-delete {
     opacity: 1;
     visibility: visible;
     margin-left: 10px;
@@ -163,7 +163,7 @@
     font-size: 20px;
   }
 
-  .btn-done {
+  .list-done {
     opacity: 1;
     visibility: visible;
     display: block;
