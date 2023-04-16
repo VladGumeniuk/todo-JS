@@ -113,6 +113,7 @@ body {
 @media (max-width: 768px) {
   .todo__add {
     border-radius: 10px 10px 0 0;
+    padding: 10px;
   }
 }
 .todo__done {
@@ -127,6 +128,7 @@ body {
     border-top: 0px;
     border-left: 2px solid yellow;
     border-radius: 0 0 10px 10px;
+    padding: 10px;
   }
 }
 .todo__form {
@@ -178,18 +180,14 @@ body {
 }
 @media (max-width: 768px) {
   .list-add-item {
-    border: 2px solid yellow;
+    border: 0px;
+    padding: 5px 10px;
+    font-size: 16px;
   }
 }
 .list-add-item span {
   display: block;
   width: 100%;
-}
-@media (max-width: 768px) {
-  .list-add-item {
-    padding: 10px 10px;
-    font-size: 16px;
-  }
 }
 
 .title {
@@ -212,7 +210,7 @@ body {
 }
 @media (max-width: 768px) {
   .todo-title {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
