@@ -79,7 +79,6 @@ function doneToDo(event) {
   const id = event.target.closest(".list-add-item");
   const idSpan = id.querySelector("#ttext");
   const spanText = idSpan.innerText;
-  console.log(spanText);
 
   const twoTask = {
     id: Date.now(),
